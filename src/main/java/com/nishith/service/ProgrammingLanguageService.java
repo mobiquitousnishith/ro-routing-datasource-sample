@@ -29,7 +29,7 @@ public class ProgrammingLanguageService {
     public ProgrammingLanguage getProgrammingLanguageByName(String name) {
         Optional<ProgrammingLanguageEntity> programmingLanguageEntityOptional = programmingLanguageRepository.findByLanguageName(name);
         ProgrammingLanguage programmingLanguage = programmingLanguageMapper.map(programmingLanguageEntityOptional
-                .orElseThrow(EntityNotFoundException::new));
+                .orElseThrow(() -> new EntityNotFoundException("Unable to find any Programming language by name [%s]".formatted(name))));
         log.debug("Programming language [{}] has been retrieved successfully.", programmingLanguage.getId());
         return programmingLanguage;
     }

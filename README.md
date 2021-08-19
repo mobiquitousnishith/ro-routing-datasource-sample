@@ -31,3 +31,9 @@ use following command for graceful shutdown:
 ```shell
 $ docker-compose down
 ```
+
+## TODO
+- Spring Implementation description
+- Running the application
+- Postman Collection
+- curl command inclusion
