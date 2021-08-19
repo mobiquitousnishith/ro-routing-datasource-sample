@@ -1,0 +1,42 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    writer:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/sample?socketTimeout=10&statement_timeout=10000
+      jdbc-url: ${spring.datasource.writer.url}
+      username: ${pg_db_username:postgres}
+      password: ${pg_db_password:password}
+      hikari:
+        connection-timeout: 5000
+        idle-timeout: 10800000
+        maximum-pool-size: 10
+        minimum-idle: 10
+        pool-name: writer-connection-pool
+        max-lifetime: 86400000
+    reader:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5433/sample?socketTimeout=10&statement_timeout=10000
+      jdbc-url: ${spring.datasource.reader.url}
+      username: ${pg_db_username:postgres}
+      password: ${pg_db_password:password}
+      hikari:
+        connection-timeout: 5000
+        idle-timeout: 10800000
+        maximum-pool-size: 10
+        minimum-idle: 10
+        pool-name: reader-connection-pool
+        max-lifetime: 86400000
+    jpa:
+      open-in-view: false
+      properties:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"

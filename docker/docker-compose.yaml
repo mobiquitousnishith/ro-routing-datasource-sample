@@ -5,6 +5,7 @@ services:
       - 5432:5432/tcp
     volumes:
       - 'postgresql_master_data:/bitnami/postgresql/13'
+      - './setup.sql:/docker-entrypoint-initdb.d/setup.sql'
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=replicator
